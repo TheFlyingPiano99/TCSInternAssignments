@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS Employers (
 	full_name Varchar(64) NOT NULL,
 	joining_date date NOT NULL,
 	current_position varchar(64),
-	department varchar(64) 
+	department varchar(16) 
 		CHECK (department IN (	'Finance',
 								'HR', 
 								'Travel', 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Service_Requests (
 	software_ID int REFERENCES Services(software_ID) NOT NULL,
 	request_start_date  date NOT NULL,
 	request_close_date  date,
-	status varchar(64) CHECK (status IN ('incomplete', 'complete', 'invalid'))
+	status varchar(10) CHECK (status IN ('incomplete', 'complete', 'invalid'))
 );
 
 
