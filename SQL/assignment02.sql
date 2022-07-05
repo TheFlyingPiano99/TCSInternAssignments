@@ -3,7 +3,7 @@
 --1 select Artists and albums:
 
 SELECT ar."Name" AS "Artist Name", COALESCE (al."Title", 'No album') AS "Album Name" 
-	FROM "Artist" AS ar FULL OUTER JOIN "Album" AS al ON ar."ArtistId" = al."ArtistId"
+	FROM "Artist" AS ar LEFT OUTER JOIN "Album" AS al ON ar."ArtistId" = al."ArtistId"
 	ORDER BY ar."Name";
 	
 --------------------------------------------------
@@ -27,7 +27,7 @@ SELECT "Name" AS "Artist Name" FROM "Artist"
 -- 4 No of albums:
 
 SELECT ar."Name" AS "Artist name", COUNT(al."ArtistId") AS "No of albums"
-	FROM "Artist" AS ar FULL OUTER JOIN "Album" AS al ON ar."ArtistId" = al."ArtistId"
+	FROM "Artist" AS ar LEFT OUTER JOIN "Album" AS al ON ar."ArtistId" = al."ArtistId"
 	GROUP BY ar."Name"
 	ORDER BY "No of albums" DESC, ar."Name" ASC;
 
