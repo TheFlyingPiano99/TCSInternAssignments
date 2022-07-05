@@ -135,8 +135,6 @@ INSERT INTO "Track" ("TrackId", "Name", "MediaTypeId", "Milliseconds", "UnitPric
 
 -- 11 track Log:
 
-DROP TABLE tracks_audit_log;
-
 CREATE TABLE IF NOT EXISTS tracks_audit_log (
 	operation varchar(6),
 	datetime timestamp,

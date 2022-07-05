@@ -1,6 +1,5 @@
 --Init Tables:
 
-DROP TABLE IF EXISTS Employers;
 CREATE TABLE IF NOT EXISTS Employers (
 	employer_ID serial PRIMARY KEY,
 	full_name Varchar(64) NOT NULL,
@@ -17,8 +16,7 @@ CREATE TABLE IF NOT EXISTS Employers (
 
 ----------------------------------------
 
-DROP TABLE IF EXISTS Services;
-CREATE TABLE Services (
+CREATE TABLE IF NOT EXISTS Services (
 	software_ID serial PRIMARY KEY,
 	name varchar(64),
 	category char CHECK (category IN ('A', 'B', 'C', 'D')),
@@ -28,8 +26,7 @@ CREATE TABLE Services (
 
 ----------------------------------------
 
-DROP TABLE IF EXISTS Service_Requests;
-CREATE TABLE Service_Requests (
+CREATE TABLE IF NOT EXISTS Service_Requests (
 	request_ID serial PRIMARY KEY,
 	employer_ID int REFERENCES Employers(employer_ID) NOT NULL,
 	software_ID int REFERENCES Services(software_ID) NOT NULL,
@@ -59,9 +56,9 @@ CREATE OR REPLACE TRIGGER on_new_request
 ----------------------------------------------------------------
 --Test:
 	
-	INSERT INTO employers (full_name, joining_date) VALUES ('John Doe', '2022-06-20');
-	INSERT INTO employers (full_name, joining_date) VALUES ('Jane Doe', '2022-06-20');
-	SELECT * FROM employers;
+INSERT INTO employers (full_name, joining_date) VALUES ('John Doe', '2022-06-20');
+INSERT INTO employers (full_name, joining_date) VALUES ('Jane Doe', '2022-06-20');
+SELECT * FROM employers;
 
 INSERT INTO services (name) VALUES ('My service 01');
 INSERT INTO services (name) VALUES ('My service 02');
