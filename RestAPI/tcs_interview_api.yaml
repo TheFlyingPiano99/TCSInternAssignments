@@ -1,0 +1,420 @@
+openapi: 3.0.0
+info:
+  title: TCS Interview API
+  version: 0.0.1
+
+paths:
+#-----------------------------------------------------------------------
+# <Accessing users>
+  /user:
+    get:
+      security:
+        - authcode: [admin]
+      tags:
+        - Accessing users
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - Accessing users
+      security:
+        - authcode: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+      
+  /user/{userId}:
+    get:
+      security:
+        - authcode: [admin]
+      
+      tags:
+        - Accessing users
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - Accessing users
+      security:
+        - authcode: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - Accessing users
+      security:
+        - authcode: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/UserId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/User'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
+#-----------------------------------------------------------------------
+# <Accessing roles>
+  /role:
+    get:
+      security:
+        - authcode: [admin]
+      tags:
+        - Accessing roles
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - Accessing roles
+      security:
+        - authcode: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+      
+  /role/{roleId}:
+    get:
+      security:
+        - authcode: [admin]
+      
+      tags:
+        - Accessing roles
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/RoleId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - Accessing roles
+      security:
+        - authcode: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/RoleId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Role'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - Accessing roles
+      security:
+        - authcode: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/RoleId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/Role'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
+#-----------------------------------------------------------------------
+# <Accessing projects>
+  /project:
+    get:
+      security:
+        - authcode: [admin]
+      tags:
+        - Accessing projects
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - Accessing projects
+      security:
+        - authcode: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+      
+  /project/{projectId}:
+    get:
+      security:
+        - authcode: [admin]
+      
+      tags:
+        - Accessing projects
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - Accessing projects
+      security:
+        - authcode: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - Accessing projects
+      security:
+        - authcode: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/Project'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
+
+
+
+
+
+#=================================================================================
+#COMPONENTS=======================================================================
+components:
+  parameters:
+    UserId:
+      in: path
+      name: userId
+      description: Unique ID of a user
+      required: true
+      schema:
+        type: string
+        example: gjeigeajnajfsjf4d5s6d6
+    RoleId:
+      in: path
+      name: roleId
+      description: Unique ID of a role
+      required: true
+      schema:
+        type: string
+        example: opnb79wbjwebwejqw5we5w
+    ProjectId:
+      in: path
+      name: projectId
+      description: Unique ID of a project
+      required: true
+      schema:
+        type: string
+        example: onaegbnaskafkasf9dv2as
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sdf2sd5sfsd6f5dfd5
+        name:
+          type: string
+          example: John Doe
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        name:
+          type: string
+          example: admin
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        name:
+          type: string
+          example: admin
+        project_manager_id:
+          type: string
+          example: sdf2sd5sfsd6f5dfd5
+
+  responses:
+    400BadRequest:
+      description: Bad request. Check the content!
+    404ObjectNotFound:
+      description: The object with the provided ID was not found
+    500APIError:
+      description: Unexpected server-side error
+  securitySchemes:
+    authcodeWithPKCE:
+      description: Authorization code flow with Proof Key for Code Exchange
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: http://oktaxxxxxx.com/authorize
+          tokenUrl: http://oktaxxxxxx.com/token
+          scopes:
+            admin: Allows adding new users to the system ...
+            recruiter: Allows rectuiter to ...
+            sourcer: Allows courcer to ...
+            project_manager: Allow project manager to ...
+
+
+
+
+
