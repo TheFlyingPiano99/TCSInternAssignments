@@ -9,7 +9,7 @@ paths:
   /user:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       tags:
         - Accessing users
       description: Retrieve multiple objects
@@ -28,7 +28,7 @@ paths:
       tags:
         - Accessing users
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Create a new object
       requestBody:
         content:
@@ -51,7 +51,7 @@ paths:
   /user/{userId}:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       
       tags:
         - Accessing users
@@ -73,7 +73,7 @@ paths:
       tags:
         - Accessing users
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
       parameters:
         - $ref: '#/components/parameters/UserId'
@@ -95,7 +95,7 @@ paths:
       tags:
         - Accessing users
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
       parameters:
         - $ref: '#/components/parameters/UserId'
@@ -117,7 +117,7 @@ paths:
   /role:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       tags:
         - Accessing roles
       description: Retrieve multiple objects
@@ -136,7 +136,7 @@ paths:
       tags:
         - Accessing roles
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Create a new object
       requestBody:
         content:
@@ -159,7 +159,7 @@ paths:
   /role/{roleId}:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       
       tags:
         - Accessing roles
@@ -181,7 +181,7 @@ paths:
       tags:
         - Accessing roles
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
       parameters:
         - $ref: '#/components/parameters/RoleId'
@@ -203,7 +203,7 @@ paths:
       tags:
         - Accessing roles
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
       parameters:
         - $ref: '#/components/parameters/RoleId'
@@ -225,7 +225,7 @@ paths:
   /project:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       tags:
         - Accessing projects
       description: Retrieve multiple objects
@@ -244,7 +244,7 @@ paths:
       tags:
         - Accessing projects
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Create a new object
       requestBody:
         content:
@@ -267,7 +267,7 @@ paths:
   /project/{projectId}:
     get:
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       
       tags:
         - Accessing projects
@@ -289,7 +289,7 @@ paths:
       tags:
         - Accessing projects
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
       parameters:
         - $ref: '#/components/parameters/ProjectId'
@@ -311,7 +311,7 @@ paths:
       tags:
         - Accessing projects
       security:
-        - authcode: [admin]
+        - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
       parameters:
         - $ref: '#/components/parameters/ProjectId'
@@ -327,6 +327,225 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
+
+#-----------------------------------------------------------------------
+# <Accessing positions>
+  /position:
+    get:
+      security:
+        - authcodeWithPKCE: [recruiter]
+      tags:
+        - Accessing positions
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - Accessing positions
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+      
+  /position/{positionId}:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+      
+      tags:
+        - Accessing positions
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/PositionId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - Accessing positions
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/PositionId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Position'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - Accessing positions
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/PositionId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/Position'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
+#---------------------------------------------------------------------------------
+# <Accessing candidates>
+  /candidate:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+        - authcodeWithPKCE: [recruiter]
+      tags:
+        - Accessing candidates
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Candidate'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - Accessing candidates
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+      
+  /candidate/{candidateId}:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+      
+      tags:
+        - Accessing candidates
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - Accessing candidates
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Candidate'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - Accessing candidates
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/Candidate'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
+
 
 
 
@@ -361,6 +580,22 @@ components:
       schema:
         type: string
         example: onaegbnaskafkasf9dv2as
+    PositionId:
+      in: path
+      name: positionId
+      description: Unique ID of a job position
+      required: true
+      schema:
+        type: string
+        example: bi9owemwef2eweoebffogk
+    CandidateId:
+      in: path
+      name: candidateId
+      description: Unique ID of a candidate for a particular position
+      required: true
+      schema:
+        type: string
+        example: kanaogbnb5gsdv3sdv
   schemas:
     User:
       type: object
@@ -389,9 +624,34 @@ components:
         name:
           type: string
           example: admin
-        project_manager_id:
+        projectManagerId:
           type: string
           example: sdf2sd5sfsd6f5dfd5
+    Position:
+      type: object
+      properties:
+        id:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        name:
+          type: string
+          example: data engineer
+        recruiterId:
+          type: string
+          example: sdf2sd5sfsd6f5dfd5
+    Candidate:
+      type: object
+      properties:
+        id:
+          type: string
+          example: kanaogbnb5gsdv3sdv
+        userId:
+          type: string
+          example: gjeigeajnajfsjf4d5s6d6
+        positionId:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+
 
   responses:
     400BadRequest:
