@@ -35,7 +35,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-            
       responses:
         201:
           description: User created sucessfully
@@ -46,7 +45,33 @@ paths:
         400:
           $ref: '#/components/responses/400BadRequest'
         500:
+          $ref: '#/components/responses/500APIError'
+    patch:
+      tags:
+        - Accessing users
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/User'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
           $ref: '#/components/responses/500APIError'      
+
       
   /user/{userId}:
     get:
@@ -65,28 +90,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'      
-    patch:
-      tags:
-        - Accessing users
-      security:
-        - authcodeWithPKCE: [admin]
-      description: Update the properties of the object with the provided ID
-      parameters:
-        - $ref: '#/components/parameters/UserId'
-      responses:
-        200:
-          description: Object was updated successfully. The updated verion is returned in content.
-          content:
-            application/json:
-              schema:
-                description: The newly updated object
-                $ref: '#/components/schemas/User'
-        400:
-          $ref: '#/components/responses/400BadRequest'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -154,7 +157,33 @@ paths:
         400:
           $ref: '#/components/responses/400BadRequest'
         500:
+          $ref: '#/components/responses/500APIError'
+    patch:
+      tags:
+        - Accessing roles
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Role'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
           $ref: '#/components/responses/500APIError'      
+      
       
   /role/{roleId}:
     get:
@@ -173,28 +202,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Role'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'      
-    patch:
-      tags:
-        - Accessing roles
-      security:
-        - authcodeWithPKCE: [admin]
-      description: Update the properties of the object with the provided ID
-      parameters:
-        - $ref: '#/components/parameters/RoleId'
-      responses:
-        200:
-          description: Object was updated successfully. The updated verion is returned in content.
-          content:
-            application/json:
-              schema:
-                description: The newly updated object
-                $ref: '#/components/schemas/Role'
-        400:
-          $ref: '#/components/responses/400BadRequest'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -251,7 +258,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Project'
-            
       responses:
         201:
           description: User created sucessfully
@@ -263,7 +269,32 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-      
+    patch:
+      tags:
+        - Accessing projects
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Project'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+ 
   /project/{projectId}:
     get:
       security:
@@ -281,28 +312,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'      
-    patch:
-      tags:
-        - Accessing projects
-      security:
-        - authcodeWithPKCE: [admin]
-      description: Update the properties of the object with the provided ID
-      parameters:
-        - $ref: '#/components/parameters/ProjectId'
-      responses:
-        200:
-          description: Object was updated successfully. The updated verion is returned in content.
-          content:
-            application/json:
-              schema:
-                description: The newly updated object
-                $ref: '#/components/schemas/Project'
-        400:
-          $ref: '#/components/responses/400BadRequest'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -358,8 +367,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Position'
-            
+              $ref: '#/components/schemas/Position'  
       responses:
         201:
           description: User created sucessfully
@@ -371,7 +379,32 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-      
+    patch:
+      tags:
+        - Accessing positions
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Position'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Position'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
   /position/{positionId}:
     get:
       security:
@@ -389,28 +422,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Position'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'      
-    patch:
-      tags:
-        - Accessing positions
-      security:
-        - authcodeWithPKCE: [admin]
-      description: Update the properties of the object with the provided ID
-      parameters:
-        - $ref: '#/components/parameters/PositionId'
-      responses:
-        200:
-          description: Object was updated successfully. The updated verion is returned in content.
-          content:
-            application/json:
-              schema:
-                description: The newly updated object
-                $ref: '#/components/schemas/Position'
-        400:
-          $ref: '#/components/responses/400BadRequest'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -480,7 +491,32 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-      
+    patch:
+      tags:
+        - Accessing candidates
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/Candidate'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+
   /candidate/{candidateId}:
     get:
       security:
@@ -498,28 +534,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Candidate'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'      
-    patch:
-      tags:
-        - Accessing candidates
-      security:
-        - authcodeWithPKCE: [admin]
-      description: Update the properties of the object with the provided ID
-      parameters:
-        - $ref: '#/components/parameters/CandidateId'
-      responses:
-        200:
-          description: Object was updated successfully. The updated verion is returned in content.
-          content:
-            application/json:
-              schema:
-                description: The newly updated object
-                $ref: '#/components/schemas/Candidate'
-        400:
-          $ref: '#/components/responses/400BadRequest'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
