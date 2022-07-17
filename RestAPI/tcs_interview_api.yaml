@@ -11,7 +11,7 @@ paths:
       security:
         - authcodeWithPKCE: [admin]
       tags:
-        - Accessing users
+        - users
       description: Retrieve multiple objects
       responses:
         200:
@@ -26,7 +26,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - Accessing users
+        - users
       security:
         - authcodeWithPKCE: [admin]
       description: Create a new object
@@ -52,7 +52,7 @@ paths:
         - authcodeWithPKCE: [admin]
       
       tags:
-        - Accessing users
+        - users
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/UserId'
@@ -69,7 +69,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     patch:
       tags:
-        - Accessing users
+        - users
       security:
         - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
@@ -96,7 +96,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - Accessing users
+        - users
       security:
         - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
@@ -122,7 +122,7 @@ paths:
       security:
         - authcodeWithPKCE: [admin]
       tags:
-        - Accessing roles
+        - roles
       description: Retrieve multiple objects
       responses:
         200:
@@ -137,7 +137,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - Accessing roles
+        - roles
       security:
         - authcodeWithPKCE: [admin]
       description: Create a new object
@@ -164,7 +164,7 @@ paths:
         - authcodeWithPKCE: [admin]
       
       tags:
-        - Accessing roles
+        - roles
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/RoleId'
@@ -181,7 +181,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     patch:
       tags:
-        - Accessing roles
+        - roles
       security:
         - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
@@ -208,7 +208,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - Accessing roles
+        - roles
       security:
         - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
@@ -234,7 +234,7 @@ paths:
       security:
         - authcodeWithPKCE: [admin]
       tags:
-        - Accessing projects
+        - projects
       description: Retrieve multiple objects
       responses:
         200:
@@ -249,7 +249,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - Accessing projects
+        - projects
       security:
         - authcodeWithPKCE: [admin]
       description: Create a new object
@@ -275,7 +275,7 @@ paths:
         - authcodeWithPKCE: [admin]
       
       tags:
-        - Accessing projects
+        - projects
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/ProjectId'
@@ -292,7 +292,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     patch:
       tags:
-        - Accessing projects
+        - projects
       security:
         - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
@@ -319,7 +319,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - Accessing projects
+        - projects
       security:
         - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
@@ -345,7 +345,7 @@ paths:
       security:
         - authcodeWithPKCE: [recruiter]
       tags:
-        - Accessing positions
+        - positions
       description: Retrieve multiple objects
       responses:
         200:
@@ -360,7 +360,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - Accessing positions
+        - positions
       security:
         - authcodeWithPKCE: [admin]
       description: Create a new object
@@ -386,7 +386,7 @@ paths:
         - authcodeWithPKCE: [admin]
       
       tags:
-        - Accessing positions
+        - positions
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/PositionId'
@@ -403,7 +403,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     patch:
       tags:
-        - Accessing positions
+        - positions
       security:
         - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
@@ -430,7 +430,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - Accessing positions
+        - positions
       security:
         - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
@@ -457,7 +457,7 @@ paths:
         - authcodeWithPKCE: [admin]
         - authcodeWithPKCE: [recruiter]
       tags:
-        - Accessing candidates
+        - candidates
       description: Retrieve multiple objects
       responses:
         200:
@@ -472,7 +472,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - Accessing candidates
+        - candidates
       security:
         - authcodeWithPKCE: [admin]
       description: Create a new object
@@ -499,7 +499,7 @@ paths:
         - authcodeWithPKCE: [admin]
       
       tags:
-        - Accessing candidates
+        - candidates
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/CandidateId'
@@ -516,7 +516,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     patch:
       tags:
-        - Accessing candidates
+        - candidates
       security:
         - authcodeWithPKCE: [admin]
       description: Update the properties of the object with the provided ID
@@ -543,7 +543,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - Accessing candidates
+        - candidates
       security:
         - authcodeWithPKCE: [admin]
       description: Delete an object with the provided ID
@@ -562,6 +562,232 @@ paths:
         500:
           $ref: '#/components/responses/500APIError'      
 
+#---------------------------------------------------------------------------------
+# <Accessing technical interview>
+  /technical:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+        - authcodeWithPKCE: [recruiter]
+      tags:
+        - technical interview
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TechnicalInterview'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - technical interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TechnicalInterviewNoId'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechnicalInterview'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+  /technical/{technicalId}:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+      
+      tags:
+        - technical interview
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/TechnicalId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TechnicalInterview'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - technical interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/TechnicalId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TechnicalInterviewNoId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/TechnicalInterview'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - technical interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/TechnicalId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/TechnicalInterview'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'
+
+
+#---------------------------------------------------------------------------------
+# <Accessing management interview>
+  /management:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+        - authcodeWithPKCE: [recruiter]
+      tags:
+        - management interview
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ManagementInterview'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - management interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManagementInterviewNoId'
+            
+      responses:
+        201:
+          description: User created sucessfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagementInterview'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'      
+  /management/{managementId}:
+    get:
+      security:
+        - authcodeWithPKCE: [admin]
+      
+      tags:
+        - management interview
+      description: Retrieve a specific object
+      parameters:
+        - $ref: '#/components/parameters/ManagementId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagementInterview'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    patch:
+      tags:
+        - management interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Update the properties of the object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/ManagementId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManagementInterviewNoId'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/ManagementInterview'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - management interview
+      security:
+        - authcodeWithPKCE: [admin]
+      description: Delete an object with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/ManagementId'
+      responses:
+        200:
+          description: Object deleted sucessfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/ManagementInterview'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'
 
 
 
@@ -613,6 +839,22 @@ components:
       schema:
         type: string
         example: kanaogbnb5gsdv3sdv
+    TechnicalId:
+      in: path
+      name: technicalId
+      description: Unique ID of a technical interview
+      required: true
+      schema:
+        type: string
+        example: kkoavldmvaskaspv24jkj
+    ManagementId:
+      in: path
+      name: managementId
+      description: Unique ID of a management interview
+      required: true
+      schema:
+        type: string
+        example: kakakvajaqoror3p42hi
   schemas:
     User:
       type: object
@@ -707,6 +949,60 @@ components:
         positionId:
           type: string
           example: opnb79wbjwebwejqw5we5w
+    TechnicalInterview:
+      type: object
+      properties:
+        id:
+          type: string
+          example: kkoavldmvaskaspv24jkj
+        candidateId:
+          type: string
+          example: kanaogbnb5gsdv3sdv
+        positionId:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        score:
+          type: integer
+          example: 80
+    TechnicalInterviewNoId:
+      type: object
+      properties:
+        candidateId:
+          type: string
+          example: kanaogbnb5gsdv3sdv
+        positionId:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        score:
+          type: integer
+          example: 80
+    ManagementInterview:
+      type: object
+      properties:
+        id:
+          type: string
+          example: kakakvajaqoror3p42hi
+        candidateId:
+          type: string
+          example: kanaogbnb5gsdv3sdv
+        positionId:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        score:
+          type: integer
+          example: 80
+    ManagementInterviewNoId:
+      type: object
+      properties:
+        candidateId:
+          type: string
+          example: kanaogbnb5gsdv3sdv
+        positionId:
+          type: string
+          example: opnb79wbjwebwejqw5we5w
+        score:
+          type: integer
+          example: 80
 
 
   responses:
