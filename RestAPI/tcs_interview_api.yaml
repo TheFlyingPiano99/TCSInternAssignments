@@ -973,7 +973,7 @@ paths:
         - schedule
       description: Retrieve a specific object
       parameters:
-        - $ref: '#/components/parameters/InterviewId'
+        - $ref: '#/components/parameters/ScheduledInterviewId'
       responses:
         200:
           description: The object is returned in content
@@ -992,7 +992,7 @@ paths:
         - authcodeWithPKCE: [technical_interviewer sourcer]
       description: Update the properties of the object with the provided ID
       parameters:
-        - $ref: '#/components/parameters/InterviewId'
+        - $ref: '#/components/parameters/ScheduledInterviewId'
       requestBody:
         content:
           application/json:
@@ -1019,7 +1019,7 @@ paths:
         - authcodeWithPKCE: [technical_interviewer sourcer]
       description: Delete an object with the provided ID
       parameters:
-        - $ref: '#/components/parameters/UserId'
+        - $ref: '#/components/parameters/ScheduledInterviewId'
       responses:
         200:
           description: Object deleted successfully. The deleted object is returned in content.
@@ -1142,9 +1142,9 @@ components:
       schema:
         type: string
         example: kakakvajaqoror3p42hi
-    InterviewId:
+    ScheduledInterviewId:
       in: path
-      name: scheduled interview ID
+      name: scheduledInterviewId
       description: Unique ID of a scheduled technical or management interview
       required: true
       schema:
@@ -1152,7 +1152,7 @@ components:
         example: kkoavldmvaskaspv24jkj
     TechnicalInterviewerId:
       in: path
-      name: technical interviewer ID
+      name: technicalInterviewerId
       description: Unique ID of a user with technical interviewer role
       required: true
       schema:
@@ -1160,7 +1160,7 @@ components:
         example: gjeigeajnajfsjf4d5s6d6
     ManagementInterviewerId:
       in: path
-      name: management interviewer ID
+      name: managementInterviewerId
       description: Unique ID of a user with management interviewer role
       required: true
       schema:
@@ -1168,7 +1168,7 @@ components:
         example: gjeigeajnajfsjf4d5s6d6
     InterviewerId:
       in: path
-      name: technical interviewer ID
+      name: interviewerId
       description: Unique ID of a user with technical interviewer or management interviewer role
       required: true
       schema:
@@ -1303,10 +1303,10 @@ components:
         managementInterviewerId:
           type: string
           example: gjdseigseajsnajfsjf4d9
-        technicalDocumentationId:
+        _technicalDocumentationId:
           type: string
           example: kkoavldmvaskaspv24jkj
-        managementDocumentationId:
+        _managementDocumentationId:
           type: string
           example: kakakvajaqoror3p42hi
     CandidateNoId:
@@ -1437,8 +1437,3 @@ components:
             technical_interviewer: Technical interviewer scope
             management_interviewer: Management interviewer scope
             candidate: Candidate scope
-
-
-
-
-
