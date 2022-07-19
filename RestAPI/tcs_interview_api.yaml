@@ -15,7 +15,12 @@ paths:
         - authcodeWithPKCE: [admin]
       tags:
         - users
-        
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -121,49 +126,6 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /users/management-interviewer:
-    get:
-      security:
-        - authcodeWithPKCE: [admin]
-        - authcodeWithPKCE: [project_manager]
-      tags:
-        - users
-      description: Retrieve management interviewers
-      responses:
-        200:
-          description: The array of objects is returned in content
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  users:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/User'  
-        500:
-          $ref: '#/components/responses/500APIError'
-  /users/technical-interviewer:
-    get:
-      security:
-        - authcodeWithPKCE: [admin]
-      tags:
-        - users
-      description: Retrieve technical interviewers
-      responses:
-        200:
-          description: The array of objects is returned in content
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  users:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/User'  
-        500:
-          $ref: '#/components/responses/500APIError'
 
 
 #-----------------------------------------------------------------------
@@ -174,6 +136,12 @@ paths:
         - authcodeWithPKCE: [admin]
       tags:
         - roles
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -289,6 +257,12 @@ paths:
         - authcodeWithPKCE: [admin project_manager]
       tags:
         - projects
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -402,6 +376,12 @@ paths:
         - authcodeWithPKCE: [recruiter]
       tags:
         - positions
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -513,6 +493,12 @@ paths:
     get:
       tags:
         - candidates
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -736,6 +722,12 @@ paths:
         - authcodeWithPKCE: [admin]
       tags:
         - technical interview
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -851,6 +843,12 @@ paths:
         - authcodeWithPKCE: [admin]
       tags:
         - management interview
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -965,6 +963,12 @@ paths:
         - authcodeWithPKCE: [sourcer]
       tags:
         - scheduled interviews
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
       description: Retrieve multiple objects
       responses:
         200:
@@ -1228,6 +1232,46 @@ components:
         type: string
         example: 7d66b824-de6d-4a9d-a918-a86b9de40a08
         description: version 4 UUID
+    PageSize:
+      in: query
+      name: pagesize
+      description: Determine how many items shoud be retrieved
+      required: false
+      schema:
+        type: integer
+        example: 50
+    Offset:
+      in: query
+      name: offset
+      description: Determine the index of the first item that should be retrieved (Starts with 0)
+      required: false
+      schema:
+        type: integer
+        example: 0
+    OrderBy:
+      in: query
+      name: order-by
+      description: order by which content field
+      required: false
+      schema:
+        type: string
+        example: name
+    OrderDirection:
+      in: query
+      name: order-direction
+      description: Ascending or descending ordering
+      required: false
+      schema:
+        type: string
+        example: ascending
+    Filter:
+      in: query
+      name: filter
+      description: Select specific subset
+      required: false
+      schema:
+        type: string
+        example: management-interviewer
 
 #--------------------------------------------------
   schemas:
