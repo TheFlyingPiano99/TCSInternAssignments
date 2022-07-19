@@ -1,17 +1,21 @@
 openapi: 3.0.0
 info:
   title: TCS Interview API
+  description: Rest API serving TCS interview orchestration
   version: 0.0.1
-
+  contact:
+    name: Zoltán Simon
+    email: zoltan.simon@edu.bme.hu
 paths:
 #-----------------------------------------------------------------------
 # <Accessing users>
-  /user:
+  /users:
     get:
       security:
         - authcodeWithPKCE: [admin]
       tags:
         - users
+        
       description: Retrieve multiple objects
       responses:
         200:
@@ -19,9 +23,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'  
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -46,7 +53,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'
-  /user/{userId}:
+  /users/{userId}:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -114,7 +121,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /user/management-interviewer:
+  /users/management-interviewer:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -128,12 +135,15 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'  
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'  
         500:
           $ref: '#/components/responses/500APIError'
-  /user/technical-interviewer:
+  /users/technical-interviewer:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -146,16 +156,19 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'  
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'  
         500:
           $ref: '#/components/responses/500APIError'
 
 
 #-----------------------------------------------------------------------
 # <Accessing roles>
-  /role:
+  /roles:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -168,9 +181,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Role'  
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -196,7 +212,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /role/{roleId}:
+  /roles/{roleId}:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -267,7 +283,7 @@ paths:
 
 #-----------------------------------------------------------------------
 # <Accessing projects>
-  /project:
+  /projects:
     get:
       security:
         - authcodeWithPKCE: [admin project_manager]
@@ -280,9 +296,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Project'  
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -307,7 +326,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /project/{projectId}:
+  /projects/{projectId}:
     get:
       security:
         - authcodeWithPKCE: [admin project_manager]
@@ -377,7 +396,7 @@ paths:
 
 #-----------------------------------------------------------------------
 # <Accessing positions>
-  /position:
+  /positions:
     get:
       security:
         - authcodeWithPKCE: [recruiter]
@@ -390,9 +409,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Position'  
+                type: object
+                properties:
+                  positions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -417,7 +439,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /position/{positionId}:
+  /positions/{positionId}:
     get:
       security:
         - authcodeWithPKCE: [recruiter]
@@ -487,7 +509,7 @@ paths:
 
 #---------------------------------------------------------------------------------
 # <Accessing candidates>
-  /candidate:
+  /candidates:
     get:
       tags:
         - candidates
@@ -498,9 +520,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Candidate'  
+                type: object
+                properties:
+                  candidates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Candidate'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -526,7 +551,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/{candidateId}:
+  /candidates/{candidateId}:
     get:
       security:
         - authcodeWithPKCE: [recruiter project_manager sourcer]
@@ -593,7 +618,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/{candidateId}/approve:
+  /candidates/{candidateId}/approve:
     patch:
       tags:
         - candidates
@@ -614,7 +639,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/{candidateId}/reject:
+  /candidates/{candidateId}/reject:
     patch:
       tags:
         - candidates
@@ -635,7 +660,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/{candidateId}/management-interviewer/{managementInterviewerId}:
+  /candidates/{candidateId}/management-interviewer/{managementInterviewerId}:
     patch:
       security:
         - authcodeWithPKCE: [project_manager]
@@ -656,7 +681,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/{candidateId}/technical-interviewer/{technicalInterviewerId}:
+  /candidates/{candidateId}/technical-interviewer/{technicalInterviewerId}:
     patch:
       security:
         - authcodeWithPKCE: [project_manager]
@@ -677,7 +702,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'      
-  /candidate/position/{positionId}:
+  /candidates/position/{positionId}:
     get:
       security:
         - authcodeWithPKCE: [recruiter]
@@ -692,9 +717,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Candidate'
+                type: object
+                properties:
+                  candidates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Candidate'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -702,7 +730,7 @@ paths:
 
 #---------------------------------------------------------------------------------
 # <Accessing technical interview>
-  /technical-documentation:
+  /technical-documentations:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -715,9 +743,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TechnicalDocumentation'  
+                type: object
+                properties:
+                  technicalDocumentations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TechnicalDocumentation'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -743,7 +774,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /technical-documentation/{technicalId}:
+  /technical-documentations/{technicalId}:
     get:
       security:
         - authcodeWithPKCE: [recruiter project_manager technical_interviewer]
@@ -814,7 +845,7 @@ paths:
 
 #---------------------------------------------------------------------------------
 # <Accessing management interview>
-  /management-documentation:
+  /management-documentations:
     get:
       security:
         - authcodeWithPKCE: [admin]
@@ -827,9 +858,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ManagementDocumentation'  
+                type: object
+                properties:
+                  managementDocumentations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagementDocumentation'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
@@ -855,7 +889,7 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'      
-  /management-documentation/{managementId}:
+  /management-documentations/{managementId}:
     get:
       security:
         - authcodeWithPKCE: [recruiter project_manager management_interviewer]
@@ -924,13 +958,13 @@ paths:
           $ref: '#/components/responses/500APIError'
 
 #---------------------------------------------------------------------------------
-# <Accessing schedule>
-  /schedule:
+# <Scheduled interviews>
+  /scheduled-interviews:
     get:
       security:
         - authcodeWithPKCE: [sourcer]
       tags:
-        - schedule
+        - scheduled interviews
       description: Retrieve multiple objects
       responses:
         200:
@@ -938,14 +972,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ScheduledInterview'  
+                type: object
+                properties:
+                  scheduledInterviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledInterview'  
         500:
           $ref: '#/components/responses/500APIError'
     post:
       tags:
-        - schedule
+        - scheduled interviews
       security:
         - authcodeWithPKCE: [sourcer]
       description: Create a new object
@@ -965,12 +1002,12 @@ paths:
           $ref: '#/components/responses/400BadRequest'
         500:
           $ref: '#/components/responses/500APIError'
-  /schedule/{scheduledInterviewId}:
+  /scheduled-interviews/{scheduledInterviewId}:
     get:
       security:
         - authcodeWithPKCE: [technical_interviewer sourcer]
       tags:
-        - schedule
+        - scheduled interviews
       description: Retrieve a specific object
       parameters:
         - $ref: '#/components/parameters/ScheduledInterviewId'
@@ -987,7 +1024,7 @@ paths:
           $ref: '#/components/responses/500APIError'
     patch:
       tags:
-        - schedule
+        - scheduled interviews
       security:
         - authcodeWithPKCE: [technical_interviewer sourcer]
       description: Update the properties of the object with the provided ID
@@ -1014,7 +1051,7 @@ paths:
           $ref: '#/components/responses/500APIError'      
     delete:
       tags:
-        - schedule
+        - scheduled interviews
       security:
         - authcodeWithPKCE: [technical_interviewer sourcer]
       description: Delete an object with the provided ID
@@ -1032,12 +1069,12 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'
-  /schedule/interviewer/{interviewerId}:
+  /scheduled-interviews/interviewer/{interviewerId}:
     get:
       security:
         - authcodeWithPKCE: [technical_interviewer management_interviewer]
       tags:
-        - schedule
+        - scheduled interviews
       description: Retrieve an array of scheduled interviews with a specific interviewer
       parameters:
         - $ref: '#/components/parameters/InterviewerId'
@@ -1047,19 +1084,22 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ScheduledInterview'
+                type: object
+                properties:
+                  scheduledInterviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledInterview'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'
-  /schedule/candidate/{candidateId}:
+  /scheduled-interviews/candidate/{candidateId}:
     get:
       security:
         - authcodeWithPKCE: [candidate sourcer]
       tags:
-        - schedule
+        - scheduled interviews
       description: Retrieve an array of scheduled interviews with a specific candidate
       parameters:
         - $ref: '#/components/parameters/CandidateId'
@@ -1069,9 +1109,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ScheduledInterview'
+                type: object
+                properties:
+                  scheduledInterviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScheduledInterview'
         404:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
@@ -1089,91 +1132,102 @@ components:
     UserId:
       in: path
       name: userId
-      description: Unique ID of a user
+      description: version 4 UUID of a user 
       required: true
       schema:
         type: string
-        example: gjeigeajnajfsjf4d5s6d6
+        example: 0ea9267e-dcc7-4ee6-9381-306e220a3588
+        description: version 4 UUID
     RoleId:
       in: path
       name: roleId
-      description: Unique ID of a role
+      description: version 4 UUID of a role
       required: true
       schema:
         type: string
-        example: opnb79wbjwebwejqw5we5w
+        example: d7961dea-b3b8-4865-abf4-57939ede0b4a
+        description: version 4 UUID
     ProjectId:
       in: path
       name: projectId
-      description: Unique ID of a project
+      description: version 4 UUID of a project
       required: true
       schema:
         type: string
-        example: onaegbnaskafkasf9dv2as
+        example: d7a1845d-29b5-4f62-8faa-456101d8f168
+        description: version 4 UUID
     PositionId:
       in: path
       name: positionId
-      description: Unique ID of a job position
+      description: version 4 UUID of a job position
       required: true
       schema:
         type: string
-        example: bi9owemwef2eweoebffogk
+        example: b2985797-38f9-4935-b9ab-c241e90b3d4a
+        description: version 4 UUID
     CandidateId:
       in: path
       name: candidateId
-      description: Unique ID of a candidate for a particular position
+      description: version 4 UUID of a candidate for a particular position
       required: true
       schema:
         type: string
-        example: kanaogbnb5gsdv3sdv
+        example: 41ab9244-8091-4619-b621-efe38dbde027
+        description: version 4 UUID
     TechnicalId:
       in: path
       name: technicalId
-      description: Unique ID of a technical interview
+      description: version 4 UUID of a technical interview
       required: true
       schema:
         type: string
-        example: kkoavldmvaskaspv24jkj
+        example: cf6c6dc9-7e09-40da-bc62-74d2251e2140
+        description: version 4 UUID
     ManagementId:
       in: path
       name: managementId
-      description: Unique ID of a management interview
+      description: version 4 UUID of a management interview
       required: true
       schema:
         type: string
-        example: kakakvajaqoror3p42hi
+        example: 29a634e5-a496-48a8-8d6b-0e694cdf8134
+        description: version 4 UUID
     ScheduledInterviewId:
       in: path
       name: scheduledInterviewId
-      description: Unique ID of a scheduled technical or management interview
+      description: version 4 UUID of a scheduled technical or management interview
       required: true
       schema:
         type: string
-        example: kkoavldmvaskaspv24jkj
+        example: cb9dd3d2-ce95-481f-a953-69d0a9cfc129
+        description: version 4 UUID
     TechnicalInterviewerId:
       in: path
       name: technicalInterviewerId
-      description: Unique ID of a user with technical interviewer role
+      description: version 4 UUID of a user with technical interviewer role
       required: true
       schema:
         type: string
-        example: gjeigeajnajfsjf4d5s6d6
+        example: 67bacb31-0f27-4a4c-9e5e-6beb0d2f3d69
+        description: version 4 UUID
     ManagementInterviewerId:
       in: path
       name: managementInterviewerId
-      description: Unique ID of a user with management interviewer role
+      description: version 4 UUID of a user with management interviewer role
       required: true
       schema:
         type: string
-        example: gjeigeajnajfsjf4d5s6d6
+        example: 6d1fc02e-47b2-488f-ba88-b1180505e53d
+        description: version 4 UUID
     InterviewerId:
       in: path
       name: interviewerId
-      description: Unique ID of a user with technical interviewer or management interviewer role
+      description: version 4 UUID of a user with technical interviewer or management interviewer role
       required: true
       schema:
         type: string
-        example: gjeigeajnajfsjf4d5s6d6
+        example: 7d66b824-de6d-4a9d-a918-a86b9de40a08
+        description: version 4 UUID
 
 #--------------------------------------------------
   schemas:
@@ -1182,7 +1236,7 @@ components:
       properties:
         id:
           type: string
-          example: sdf2sd5sfsd6f5dfd5
+          example: a9756c50-febb-4dd7-8145-c85da5863dda
         firstName:
           type: string
           example: John
@@ -1193,7 +1247,7 @@ components:
           type: string
           example: D.
         employeeId:
-          type: integer
+          type: string
           example: 1234567
         profilePictureURL:
           type: string
@@ -1201,9 +1255,11 @@ components:
         dateOfBirth:
           type: string
           example: 1999-08-15
+          description: date in YYYY-MM-DD format
         roleId:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: d329f084-20be-4006-90d1-c42e27360326
+          description: version 4 UUID
     UserNoId:
       type: object
       properties:
@@ -1217,7 +1273,7 @@ components:
           type: string
           example: D.
         employeeId:
-          type: integer
+          type: string
           example: 1234567
         profilePictureURL:
           type: string
@@ -1225,15 +1281,18 @@ components:
         dateOfBirth:
           type: string
           example: 1999-08-15
+          description: date in YYYY-MM-DD format
         roleId:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: d329f084-20be-4006-90d1-c42e27360326
+          description: version 4 UUID
     Role:
       type: object
       properties:
         id:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: fdb10b0c-0842-4659-bee8-c32cb7508a39
+          description: version 4 UUID
         name:
           type: string
           example: administrator
@@ -1248,13 +1307,15 @@ components:
       properties:
         id:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: 5924d57d-ae08-49ff-8a0a-c77489e3c895
+          description: version 4 UUID
         name:
           type: string
           example: Interview system
         projectManagerId:
           type: string
-          example: sdf2sd5sfsd6f5dfd5
+          example: 48e6181c-5b37-4481-8fa8-dadb91e4a8cd
+          description: version 4 UUID
     ProjectNoId:
       type: object
       properties:
@@ -1263,19 +1324,22 @@ components:
           example: Interview system
         projectManagerId:
           type: string
-          example: sdf2sd5sfsd6f5dfd5
+          example: 48e6181c-5b37-4481-8fa8-dadb91e4a8cd
+          description: version 4 UUID
     Position:
       type: object
       properties:
         id:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: 234b821c-941d-439c-9558-1bf952838b43
+          description: version 4 UUID
         name:
           type: string
           example: data engineer
         recruiterId:
           type: string
-          example: sdf2sd5sfsd6f5dfd5
+          example: d867dc22-51ec-4de6-935e-2769ffc43afd
+          description: version 4 UUID
     PositionNoId:
       type: object
       properties:
@@ -1284,66 +1348,83 @@ components:
           example: data engineer
         recruiterId:
           type: string
-          example: sdf2sd5sfsd6f5dfd5
+          example: d867dc22-51ec-4de6-935e-2769ffc43afd
+          description: version 4 UUID
     Candidate:
       type: object
       properties:
         id:
           type: string
-          example: kanaogbnb5gsdv3sdv
+          example: 52c2fc2d-04c1-4d17-bdef-72aca038749e
+          description: version 4 UUID
         userId:
           type: string
-          example: gjeigeajnajfsjf4d5s6d6
+          example: e6c548be-3267-4954-9b98-730ca0c49b9e
+          description: version 4 UUID
         positionId:
           type: string
-          example: opnb79wbjwebwejqw5we5w
+          example: b46ef63b-d4c3-4a36-9649-615b004a7019
+          description: version 4 UUID
         technicalInterviewerId:
           type: string
           example: akds7igseajsnajfsjf410
+          description: version 4 UUID
         managementInterviewerId:
           type: string
           example: gjdseigseajsnajfsjf4d9
+          description: version 4 UUID
         _technicalDocumentationId:
           type: string
           example: kkoavldmvaskaspv24jkj
+          description: version 4 UUID
         _managementDocumentationId:
           type: string
           example: kakakvajaqoror3p42hi
+          description: version 4 UUID
     CandidateNoId:
       type: object
       properties:
         userId:
           type: string
           example: gjeigeajnajfsjf4d5s6d6
+          description: version 4 UUID
         positionId:
           type: string
           example: opnb79wbjwebwejqw5we5w
+          description: version 4 UUID
         technicalInterviewerId:
           type: string
           example: akds7igseajsnajfsjf410
+          description: version 4 UUID
         managementInterviewerId:
           type: string
           example: gjdseigseajsnajfsjf4d9
+          description: version 4 UUID
         technicalDocumentationId:
           type: string
           example: kkoavldmvaskaspv24jkj
+          description: version 4 UUID
         managementDocumentationId:
           type: string
           example: kakakvajaqoror3p42hi
+          description: version 4 UUID
     TechnicalDocumentation:
       type: object
       properties:
         id:
           type: string
           example: kkoavldmvaskaspv24jkj
+          description: version 4 UUID
         candidateId:
           type: string
           example: kanaogbnb5gsdv3sdv
+          description: version 4 UUID
         interviewerId:
           type: string
           example: sdf2sd5sfsd6f5dfd5
+          description: version 4 UUID
         score:
-          type: integer
+          type: string
           example: 80
     TechnicalDocumentationNoId:
       type: object
@@ -1351,14 +1432,17 @@ components:
         candidateId:
           type: string
           example: kanaogbnb5gsdv3sdv
+          description: version 4 UUID
         positionId:
           type: string
           example: opnb79wbjwebwejqw5we5w
+          description: version 4 UUID
         interviewerId:
           type: string
           example: sdf2sd5sfsd6f5dfd5
+          description: version 4 UUID
         score:
-          type: integer
+          type: string
           example: 80
     ManagementDocumentation:
       type: object
@@ -1366,14 +1450,17 @@ components:
         id:
           type: string
           example: kakakvajaqoror3p42hi
+          description: version 4 UUID
         candidateId:
           type: string
           example: kanaogbnb5gsdv3sdv
+          description: version 4 UUID
         interviewerId:
           type: string
           example: sdf2sd5sfsd6f5dfd5
+          description: version 4 UUID
         score:
-          type: integer
+          type: string
           example: 80
     ManagementDocumentationNoId:
       type: object
@@ -1381,11 +1468,13 @@ components:
         candidateId:
           type: string
           example: kanaogbnb5gsdv3sdv
+          description: version 4 UUID
         interviewerId:
           type: string
           example: sdf2sd5sfsd6f5dfd5
+          description: version 4 UUID
         score:
-          type: integer
+          type: string
           example: 80
     ScheduledInterview:
       type: object
@@ -1396,29 +1485,52 @@ components:
         candidateId:
           type: string
           example: kkoavldmvaskaspv24jkj
+          description: version 4 UUID
         interviewerId:
           type: string
           example: skko4fd5fdf5s6s6d5d5d
-        date:
+          description: version 4 UUID
+        start:
           type: string
-          example: 2022-08-20
-        startTime:
+          example: 2022-08-15 14:30:00
+          description: UTC timestamp like YYYY-MM-DD hh:mm:ss
+        finish:
           type: string
-          example: 10:30
-        finishTime:
+          example: 2022-08-15 15:00:00
+          description: UTC timestamp like YYYY-MM-DD hh:mm:ss
+    ErrorDetails:
+      type: object
+      properties:
+        causedBy:
           type: string
-          example: 11:00
+          example: controller
+          description: The source of the error
+        errorMessage:
+          type: string
+          example: Was not able to parse the provided timestamp
+          description: Short description of the nature of the error
 
 
 #--------------------------------------------------------------
   responses:
     400BadRequest:
       description: Bad request. Check the content!
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDetails'
     404ObjectNotFound:
-      description: The object with the provided ID was not found
+      description: The object with the provided identifier was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDetails'
     500APIError:
       description: Unexpected server-side error
-
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorDetails'
 
 #--------------------------------------------------------------
   securitySchemes:
