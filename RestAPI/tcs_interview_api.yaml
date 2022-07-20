@@ -956,7 +956,124 @@ paths:
           $ref: '#/components/responses/500APIError'
 
 #---------------------------------------------------------------------------------
-# <Scheduled interviews>
+# <Candidate CV>
+  /cv:
+    get:
+      security:
+        - authcodeWithPKCE: [sourcer recruiter]
+      tags:
+        - CV
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/OrderBy'
+        - $ref: '#/components/parameters/OrderDirection'
+        - $ref: '#/components/parameters/Filter'
+      description: Retrieve multiple objects
+      responses:
+        200:
+          description: The array of objects is returned in content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cvs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CandidateCV'  
+        500:
+          $ref: '#/components/responses/500APIError'
+    post:
+      tags:
+        - CV
+      security:
+        - authcodeWithPKCE: [sourcer]
+      description: Create a new object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateCV'
+      responses:
+        201:
+          description: CV created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateCV'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        500:
+          $ref: '#/components/responses/500APIError'
+  /cv/{candidateId}:
+    get:
+      security:
+        - authcodeWithPKCE: [technical_interviewer management_interviewer sourcer recruiter project_manager]
+      tags:
+        - CV
+      description: Retrieve the CV of the given candidate
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      responses:
+        200:
+          description: The object is returned in content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CandidateCV'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'
+    patch:
+      tags:
+        - CV
+      security:
+        - authcodeWithPKCE: [sourcer]
+      description: Update the CV of the candidate with the provided ID
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateCV'
+      responses:
+        200:
+          description: Object was updated successfully. The updated verion is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The newly updated object
+                $ref: '#/components/schemas/CandidateCV'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'      
+    delete:
+      tags:
+        - CV
+      security:
+        - authcodeWithPKCE: [technical_interviewer sourcer]
+      description: Delete the CV of the given candidate
+      parameters:
+        - $ref: '#/components/parameters/CandidateId'
+      responses:
+        200:
+          description: Object deleted successfully. The deleted object is returned in content.
+          content:
+            application/json:
+              schema:
+                description: The deleted object
+                $ref: '#/components/schemas/CandidateCV'
+        404:
+          $ref: '#/components/responses/404ObjectNotFound'
+        500:
+          $ref: '#/components/responses/500APIError'
+
   /scheduled-interviews:
     get:
       security:
@@ -1073,56 +1190,7 @@ paths:
           $ref: '#/components/responses/404ObjectNotFound'
         500:
           $ref: '#/components/responses/500APIError'
-  /scheduled-interviews/interviewer/{interviewerId}:
-    get:
-      security:
-        - authcodeWithPKCE: [technical_interviewer management_interviewer]
-      tags:
-        - scheduled interviews
-      description: Retrieve an array of scheduled interviews with a specific interviewer
-      parameters:
-        - $ref: '#/components/parameters/InterviewerId'
-      responses:
-        200:
-          description: The array is returned in content
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  scheduledInterviews:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ScheduledInterview'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'
-  /scheduled-interviews/candidate/{candidateId}:
-    get:
-      security:
-        - authcodeWithPKCE: [candidate sourcer]
-      tags:
-        - scheduled interviews
-      description: Retrieve an array of scheduled interviews with a specific candidate
-      parameters:
-        - $ref: '#/components/parameters/CandidateId'
-      responses:
-        200:
-          description: The array is returned in content
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  scheduledInterviews:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ScheduledInterview'
-        404:
-          $ref: '#/components/responses/404ObjectNotFound'
-        500:
-          $ref: '#/components/responses/500APIError'
+
 
 
 
@@ -1553,6 +1621,18 @@ components:
           type: string
           example: Was not able to parse the provided timestamp
           description: Short description of the nature of the error
+    CandidateCV:
+      type: object
+      properties:
+        candidateId:
+          type: string
+          example: 3ea4d01c-297a-4f4d-a76f-52ffecd4247d
+          description: version 4 UUID of the candidate
+        data:
+          type: string
+          example: VGhpcyBpcyBhbiBleGFtcGxlIGRvY3VtZW50IHRoYXQgY291bGQgYmUgeW91ciBDVi4gSXQncyBub3QgdGhvLiBJIGhvcGUgdGhhdCB0aGlzIGlzIGEgZ29vZCBleGFtcGxlIGZvciBCYXNlNjQgZW5jb2RpbmcuIEJ5IFpvbGk=
+          description: Base64 encoded document. Character set is UTF-8 and newline is LF
+
 
 
 #--------------------------------------------------------------
